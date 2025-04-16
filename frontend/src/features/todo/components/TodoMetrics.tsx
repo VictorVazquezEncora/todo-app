@@ -4,11 +4,6 @@ import { useTodo } from "../context/useTodo";
 const TodoMetrics = () => {
   const { metrics } = useTodo();
 
-  useEffect(() => {
-    console.log("METRICS FROM THE COMPONENT THAT WILL SHOW IT");
-    console.log(metrics);
-  }, [metrics?.averageTime]);
-
   return (
     <div className="flex justify-between gap-6 p-6 bg-card rounded-lg shadow-sm border">
       {/* Average Time Section */}

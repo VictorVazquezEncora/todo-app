@@ -71,7 +71,6 @@ export const TodoContext = createContext<TodoContextType>(initialState);
 export const TodoProvider: React.FC<{ children: ReactNode }> = ({
   children,
 }) => {
-  // State
   const [todos, setTodos] = useState<Todo[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -82,12 +81,6 @@ export const TodoProvider: React.FC<{ children: ReactNode }> = ({
   );
   const [metrics, setMetrics] = useState<TodoMetrics>(initialState.metrics);
 
-  useEffect(() => {
-    console.log("METRICS UPDATED IN CONTEXT:");
-    console.log(metrics);
-  }, [metrics]);
-
-  // Load todos
   const fetchTodos = async () => {
     setIsLoading(true);
     setError(null);
@@ -99,9 +92,7 @@ export const TodoProvider: React.FC<{ children: ReactNode }> = ({
         sorting.sortString
       );
 
-      console.log("FETCHING METRICS");
       await refreshMetrics();
-      console.log("METRICS FETCHED");
 
       setTodos(response.data);
       setPagination((prev) => ({ ...prev, totalItems: response.totalItems }));
@@ -117,7 +108,6 @@ export const TodoProvider: React.FC<{ children: ReactNode }> = ({
     }
   };
 
-  // Load metrics
   const refreshMetrics = async () => {
     try {
       const metricsData = await todoService.fetchTodoMetrics();
@@ -131,7 +121,6 @@ export const TodoProvider: React.FC<{ children: ReactNode }> = ({
     }
   };
 
-  // Initial load
   useEffect(() => {
     const initializeData = async () => {
       await fetchTodos();
@@ -145,7 +134,6 @@ export const TodoProvider: React.FC<{ children: ReactNode }> = ({
     fetchTodos();
   }, [filters, sorting, pagination.pageSize, pagination.currentPage]);
 
-  // Toggle todo status (done/undone)
   const toggleTodoStatus = async (id: number, done: boolean) => {
     setIsLoading(true);
     setError(null);
@@ -177,24 +165,19 @@ export const TodoProvider: React.FC<{ children: ReactNode }> = ({
     }
   };
 
-  // Update filters
   const handleSetFilters = (newFilters: Partial<TodoFilters>) => {
-    // Reset to first page when filters change
     setPagination((prev) => ({ ...prev, currentPage: 0 }));
     setFilters((prev) => ({ ...prev, ...newFilters }));
   };
 
-  // Update sorting
   const handleSetSort = (sortString: string | null) => {
     setSorting({ sortString });
   };
 
-  // Set page
   const setPage = (page: number) => {
     setPagination((prev) => ({ ...prev, currentPage: page }));
   };
 
-  // Set page size
   const setPageSize = (size: number) => {
     setPagination((prev) => ({ ...prev, pageSize: size, currentPage: 0 }));
   };

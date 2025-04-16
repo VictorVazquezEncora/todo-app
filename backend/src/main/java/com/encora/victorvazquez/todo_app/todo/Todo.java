@@ -17,7 +17,6 @@ public class Todo {
         HIGH, MEDIUM, LOW
     }
 
-    // Default constructor for Jackson
     public Todo() {
         this.done = false;
         this.creationDate = LocalDateTime.now();

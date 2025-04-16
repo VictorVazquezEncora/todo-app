@@ -35,18 +35,9 @@ public class InMemoryTodoRepository implements TodoRepository {
 
     @Override
     public Todo save(Todo todo) {   
-        System.out.println("Saving text from repository: " + todo.getId());
-        System.out.println("Saving text from repository: " + todo.getText());
-        System.out.println("Saving priority from repository: " + todo.getPriority());
-        System.out.println("Saving done from repository: " + todo.isDone());
-        System.out.println("Saving creationDate from repository: " + todo.getCreationDate());
-        System.out.println("Saving dueDate from repository: " + todo.getDueDate());
         if (todo.getId() == null) {
             todo.setId(nextId++);
             todos.add(todo);
-            for (Todo t : todos) {
-                System.out.println("Todo from repository: " + t.getId());
-            }
         } else {
             int index = -1;
             for (int i = 0; i < todos.size(); i++) {

@@ -11,23 +11,6 @@ export const formatDate = (dateString: string | null): string => {
   }
 };
 
-// Calculate time difference in minutes
-export const getTimeDifferenceInMinutes = (
-  startDate: string,
-  endDate: string
-): number => {
-  try {
-    const start = parseISO(startDate);
-    const end = parseISO(endDate);
-
-    const diffMs = end.getTime() - start.getTime();
-    return Math.floor(diffMs / (1000 * 60));
-  } catch (error) {
-    console.error("Error calculating time difference:", error);
-    return 0;
-  }
-};
-
 // Get urgency level based on due date
 export const getDueDateUrgency = (
   dueDate: string | null
@@ -50,15 +33,4 @@ export const getDueDateUrgency = (
     console.error("Error determining due date urgency:", error);
     return null;
   }
-};
-
-// Format minutes to hours and minutes display
-export const formatMinutes = (minutes: number): string => {
-  const hours = Math.floor(minutes / 60);
-  const mins = minutes % 60;
-
-  if (hours > 0) {
-    return `${hours}h ${mins}m`;
-  }
-  return `${mins}m`;
 };

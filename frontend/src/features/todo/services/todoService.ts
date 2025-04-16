@@ -6,7 +6,6 @@ interface PageResponse {
   totalItems: number;
 }
 
-// Build query parameters for filtering and pagination
 const buildQueryParams = (
   filters?: TodoFilters,
   pagination?: Partial<PaginationState>,
@@ -14,7 +13,6 @@ const buildQueryParams = (
 ): string => {
   const params = new URLSearchParams();
 
-  // Add filter parameters if they exist
   if (filters) {
     if (filters.text && filters.text.trim() !== "") {
       params.append("text", filters.text);
@@ -29,19 +27,16 @@ const buildQueryParams = (
     }
   }
 
-  // Add pagination parameters if they exist
   if (pagination) {
     if (pagination.pageSize) {
       params.append("size", pagination.pageSize.toString());
     }
 
     if (pagination.currentPage !== undefined) {
-      // API usually expects 0-based index for pages
       params.append("page", pagination.currentPage.toString());
     }
   }
 
-  // Add sorting parameters if they exist
   if (sortString) {
     params.append("sortBy", sortString);
   }
@@ -50,7 +45,6 @@ const buildQueryParams = (
   return queryString ? `?${queryString}` : "";
 };
 
-// Fetch all todos with optional filters and pagination
 export const fetchTodos = async (
   filters?: TodoFilters,
   pagination?: Partial<PaginationState>,
@@ -58,9 +52,6 @@ export const fetchTodos = async (
 ): Promise<PageResponse> => {
   const queryParams = buildQueryParams(filters, pagination, sortString);
   const response = await get<PageResponse>(`/todos${queryParams}`);
-
-  console.log("RESPONSE");
-  console.log(response);
 
   return response;
 };
@@ -89,15 +80,10 @@ export const markTodoAsUndone = async (id: number): Promise<Todo> => {
 export const fetchTodoMetrics = async (): Promise<TodoMetrics> => {
   const todos = await fetchTodos();
 
-  console.log("TODOS FROM METRICS");
-  console.log(todos);
-
-  // Calculate completed todos and their completion times
   const completedTodos = todos.data.filter(
     (todo) => todo.done && todo.doneDate
   );
 
-  // If no completed todos, return default metrics
   if (completedTodos.length === 0) {
     return {
       averageTime: 0,
@@ -109,11 +95,10 @@ export const fetchTodoMetrics = async (): Promise<TodoMetrics> => {
     };
   }
 
-  // Calculate average completion time
   const completionTimes = completedTodos.map((todo) => {
     const creationDate = new Date(todo.creationDate);
     const doneDate = new Date(todo.doneDate);
-    return (doneDate.getTime() - creationDate.getTime()) / (1000 * 60); // Convert to minutes
+    return (doneDate.getTime() - creationDate.getTime()) / (1000 * 60);
   });
 
   const averageTime =
@@ -122,12 +107,11 @@ export const fetchTodoMetrics = async (): Promise<TodoMetrics> => {
         completionTimes.length
       : 0;
 
-  // Calculate average time by priority
   const byPriority = completedTodos.reduce((acc, todo) => {
     const creationDate = new Date(todo.creationDate);
     const doneDate = new Date(todo.doneDate);
     const completionTime =
-      (doneDate.getTime() - creationDate.getTime()) / (1000 * 60); // Convert to minutes
+      (doneDate.getTime() - creationDate.getTime()) / (1000 * 60);
 
     if (!acc[todo.priority]) {
       acc[todo.priority] = { sum: 0, count: 0 };
@@ -137,7 +121,6 @@ export const fetchTodoMetrics = async (): Promise<TodoMetrics> => {
     return acc;
   }, {} as { [key: string]: { sum: number; count: number } });
 
-  // Convert to average times with default values for all priorities
   const averageByPriority = {
     LOW: 0,
     MEDIUM: 0,
@@ -148,11 +131,6 @@ export const fetchTodoMetrics = async (): Promise<TodoMetrics> => {
       return acc;
     }, {} as { [key: string]: number }),
   };
-
-  console.log("BY PRIORITY");
-  console.log(averageByPriority);
-  console.log("AVERAGE TIME");
-  console.log(averageTime);
 
   return {
     averageTime: parseFloat(averageTime.toFixed(0)),
