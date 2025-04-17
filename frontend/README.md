@@ -47,7 +47,7 @@ Before you begin, you will need to have the following tools installed on your ma
 
 ```bash
 # Clone this repository
-$ git clone <your-repo-url>
+$ git clone https://github.com/VictorVazquezEncora/todo-app
 
 # Access the project folder
 $ cd todo-app/frontend
@@ -56,7 +56,11 @@ $ cd todo-app/frontend
 $ npm install
 
 # Run the development server
-$ npm run dev
+$ npm run start
+
+# Run the tests of the application
+$ npm run tests
+
 
 # The application will open on port 8080 - go to http://localhost:8080
 ```

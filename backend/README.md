@@ -24,6 +24,18 @@ If you don't have maven installed and you want to run it from the local one in t
 ./mvnw spring-boot:run
 ```
 
+To run the tests you have to execute the following command
+
+```shell
+mvn test
+```
+
+or if you don't have maven installed
+
+```shell
+./mvnw test
+```
+
 ## Features
 
 ### Todo Management
