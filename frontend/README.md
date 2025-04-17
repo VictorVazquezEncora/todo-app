@@ -1,54 +1,103 @@
-# React + TypeScript + Vite
+<h1 align="center">
+  <a href="#"> Todo App Frontend </a>
+</h1>
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+<h3 align="center">A modern React-based Todo application with advanced features!</h3>
 
-Currently, two official plugins are available:
+<p align="center">
+  <img alt="React Version" src="https://img.shields.io/badge/react-18.3.1-blue">
+  <img alt="TypeScript" src="https://img.shields.io/badge/typescript-5.5.3-blue">
+  <img alt="Tailwind" src="https://img.shields.io/badge/tailwind-3.4-blueviolet">
+</p>
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## About
 
-## Expanding the ESLint configuration
+Todo App is a modern web application built with React and TypeScript. It provides an interface for managing todos with features like filtering, sorting, and priority management. The UI is built with shadcn/ui components and styled with Tailwind CSS for a clean, professional look.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+---
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+## Features
+
+- Create, edit, and delete todos
+- Priority-based task management (High, Medium, Low)
+- Due date assignment and tracking
+- Advanced filtering and search capabilities
+- Task status management (Done/Undone)
+- Dark/Light theme support
+- Pagination for large task lists
+- Performance metrics dashboard
+
+---
+
+## How it works
+
+The project is divided into two parts:
+
+1. Backend (Spring Boot API)
+2. Frontend (This React application)
+
+### Pre-requisites
+
+Before you begin, you will need to have the following tools installed on your machine:
+- [Node.js](https://nodejs.org/en/) (v18 or higher)
+- [Git](https://git-scm.com)
+- A code editor like [VSCode](https://code.visualstudio.com/)
+
+#### Running the web application
+
+```bash
+# Clone this repository
+$ git clone <your-repo-url>
+
+# Access the project folder
+$ cd todo-app/frontend
+
+# Install dependencies
+$ npm install
+
+# Run the development server
+$ npm run dev
+
+# The application will open on port 8080 - go to http://localhost:8080
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+---
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## Tech Stack
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+The following tools were used in the construction of the project:
+
+#### **Core** ([React](https://reactjs.org/) + [TypeScript](https://www.typescriptlang.org/))
+
+- **[Vite](https://vitejs.dev/)** - Build tool and development server
+- **[React Router Dom](https://reactrouter.com/)** - Routing
+- **[Axios](https://axios-http.com/)** - HTTP client
+- **[Tailwind CSS](https://tailwindcss.com/)** - Styling
+- **[shadcn/ui](https://ui.shadcn.com/)** - UI Components
+- **[date-fns](https://date-fns.org/)** - Date utilities
+
+#### **Development Tools**
+
+- **[TypeScript](https://www.typescriptlang.org/)**
+- **[ESLint](https://eslint.org/)**
+- **[Jest](https://jestjs.io/)**
+- **[Testing Library](https://testing-library.com/)**
+
+> See the file [package.json](package.json) for all dependencies
+
+#### **Component Architecture**
+
+The application follows a feature-based architecture:
+- `components/` - Reusable UI components
+- `features/` - Feature-specific components and logic
+- `context/` - React context providers
+- `services/` - API communication
+- `utils/` - General purpose functions
+- `lib/` - Adapter patterns to avoid tight coupling with 3rd party libraries
+
+#### **Styling**
+
+- Uses Tailwind CSS for utility-first styling
+- Uses ShadCN as the component library
+- Dark mode support
+- Animation utilities
