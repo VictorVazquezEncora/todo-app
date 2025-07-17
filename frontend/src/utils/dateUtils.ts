@@ -34,3 +34,28 @@ export const getDueDateUrgency = (
     return null;
   }
 };
+
+// Format minutes into days:hours:minutes format
+export const formatMinutesToDuration = (minutes: number): string => {
+  if (minutes === 0) return "0m";
+  
+  const days = Math.floor(minutes / (24 * 60));
+  const hours = Math.floor((minutes % (24 * 60)) / 60);
+  const remainingMinutes = Math.floor(minutes % 60);
+  
+  const parts = [];
+  
+  if (days > 0) {
+    parts.push(`${days}d`);
+  }
+  
+  if (hours > 0) {
+    parts.push(`${hours}h`);
+  }
+  
+  if (remainingMinutes > 0) {
+    parts.push(`${remainingMinutes}m`);
+  }
+  
+  return parts.length > 0 ? parts.join(" ") : "0m";
+};

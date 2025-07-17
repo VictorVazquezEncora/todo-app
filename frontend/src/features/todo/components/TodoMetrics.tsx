@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { formatMinutesToDuration } from "../../../utils/dateUtils";
 import { useTodo } from "../context/useTodo";
 
 const TodoMetrics = () => {
@@ -13,7 +13,7 @@ const TodoMetrics = () => {
         </h2>
         <div className="flex items-center justify-between">
           <span className="text-3xl font-bold text-foreground">
-            {metrics ? `${metrics.averageTime} minutes` : "0 mins"}
+            {metrics ? formatMinutesToDuration(metrics.averageTime) : "0m"  }
           </span>
         </div>
       </div>
@@ -28,24 +28,24 @@ const TodoMetrics = () => {
             <span className="text-muted-foreground">Low:</span>
             <span className="font-medium text-foreground">
               {metrics?.byPriority?.LOW
-                ? `${metrics.byPriority.LOW} mins`
-                : "0 mins"}
+                ? formatMinutesToDuration(metrics.byPriority.LOW)
+                : "0m"}
             </span>
           </div>
           <div className="flex justify-between items-center">
             <span className="text-muted-foreground">Medium:</span>
             <span className="font-medium text-foreground">
               {metrics?.byPriority?.MEDIUM
-                ? `${metrics.byPriority.MEDIUM} mins`
-                : "0 mins"}
+                ? formatMinutesToDuration(metrics.byPriority.MEDIUM)
+                : "0m"}
             </span>
           </div>
           <div className="flex justify-between items-center">
             <span className="text-muted-foreground">High:</span>
             <span className="font-medium text-foreground">
               {metrics?.byPriority?.HIGH
-                ? `${metrics.byPriority.HIGH} mins`
-                : "0 mins"}
+                ? formatMinutesToDuration(metrics.byPriority.HIGH)
+                : "0m"}
             </span>
           </div>
         </div>

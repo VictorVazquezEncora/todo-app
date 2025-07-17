@@ -109,3 +109,13 @@
 .task-normal {
   @apply bg-todo-normal;
 }
+
+/* Date input calendar icon styling */
+input[type="date"]::-webkit-calendar-picker-indicator {
+  cursor: pointer;
+}
+
+/* Dark mode: make calendar icon white */
+.dark input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+}
