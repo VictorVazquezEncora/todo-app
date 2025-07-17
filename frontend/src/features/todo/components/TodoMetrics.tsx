@@ -1,3 +1,4 @@
+import React from "react";
 import { formatMinutesToDuration } from "../../../utils/dateUtils";
 import { useTodo } from "../context/useTodo";
 
@@ -13,7 +14,7 @@ const TodoMetrics = () => {
         </h2>
         <div className="flex items-center justify-between">
           <span className="text-3xl font-bold text-foreground">
-            {metrics ? formatMinutesToDuration(metrics.averageTime) : "0m"  }
+            {metrics ? formatMinutesToDuration(metrics.averageTime) : "0m"}
           </span>
         </div>
       </div>

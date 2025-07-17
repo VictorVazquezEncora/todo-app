@@ -78,7 +78,8 @@ export const markTodoAsUndone = async (id: number): Promise<Todo> => {
 };
 
 export const fetchTodoMetrics = async (): Promise<TodoMetrics> => {
-  const todos = await fetchTodos();
+  // Fetch ALL todos (not paginated) for metrics calculation
+  const todos = await fetchTodos(undefined, { pageSize: 1000 });
 
   const completedTodos = todos.data.filter(
     (todo) => todo.done && todo.doneDate
@@ -96,8 +97,8 @@ export const fetchTodoMetrics = async (): Promise<TodoMetrics> => {
   }
 
   const completionTimes = completedTodos.map((todo) => {
-    const creationDate = new Date(todo.creationDate);
-    const doneDate = new Date(todo.doneDate);
+    const creationDate = new Date(todo.creationDate!);
+    const doneDate = new Date(todo.doneDate!);
     return (doneDate.getTime() - creationDate.getTime()) / (1000 * 60);
   });
 
@@ -108,8 +109,8 @@ export const fetchTodoMetrics = async (): Promise<TodoMetrics> => {
       : 0;
 
   const byPriority = completedTodos.reduce((acc, todo) => {
-    const creationDate = new Date(todo.creationDate);
-    const doneDate = new Date(todo.doneDate);
+    const creationDate = new Date(todo.creationDate!);
+    const doneDate = new Date(todo.doneDate!);
     const completionTime =
       (doneDate.getTime() - creationDate.getTime()) / (1000 * 60);
 
