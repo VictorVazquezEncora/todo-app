@@ -84,4 +84,23 @@ public class TodoControllerTest {
         assertTrue(!response.getBody().isDone());
     }
 
+    @Test
+    void testUpdateTodo() {
+        TodoController controller = createController();
+        Todo originalTodo = new Todo("Original Todo", Todo.Priority.LOW, LocalDateTime.of(2025, 1, 1, 0, 0));
+        Todo createdTodo = controller.createTodo(originalTodo).getBody();
+        assertNotNull(createdTodo);
+        assertNotNull(createdTodo.getId());
+
+        Todo updateTodo = new Todo("Updated Todo", Todo.Priority.HIGH, LocalDateTime.of(2025, 2, 1, 0, 0));
+        ResponseEntity<Todo> response = controller.updateTodo(createdTodo.getId(), updateTodo);
+        
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertNotNull(response.getBody());
+        assertEquals("Updated Todo", response.getBody().getText());
+        assertEquals(Todo.Priority.HIGH, response.getBody().getPriority());
+        assertEquals(LocalDateTime.of(2025, 2, 1, 0, 0), response.getBody().getDueDate());
+        assertEquals(createdTodo.getId(), response.getBody().getId()); // ID should remain the same
+    }
+
 }
